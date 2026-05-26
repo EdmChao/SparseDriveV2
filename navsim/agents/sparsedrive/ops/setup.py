@@ -43,32 +43,56 @@ def make_cuda_ext(
     )
 
 
+# if __name__ == "__main__":
+#     setup(
+#         name="deformable_aggregation_with_depth_ext",
+#         ext_modules=[
+#             make_cuda_ext(
+#                 "deformable_aggregation_with_depth_ext",
+#                 module=".",
+#                 sources=[
+#                     f"src/deformable_aggregation_with_depth.cpp",
+#                     f"src/deformable_aggregation_with_depth_cuda.cu",
+#                 ],
+#             ),
+#         ],
+#         cmdclass={"build_ext": BuildExtension},
+#     )
+#     setup(
+#         name="deformable_aggregation_ext",
+#         ext_modules=[
+#             make_cuda_ext(
+#                 "deformable_aggregation_ext",
+#                 module=".",
+#                 sources=[
+#                     f"src/deformable_aggregation.cpp",
+#                     f"src/deformable_aggregation_cuda.cu",
+#                 ],
+#             ),
+#         ],
+#         cmdclass={"build_ext": BuildExtension},
+#     )
 if __name__ == "__main__":
+    ext_modules = [
+        make_cuda_ext(
+            "deformable_aggregation_with_depth_ext",
+            module=".",
+            sources=[
+                "src/deformable_aggregation_with_depth.cpp",
+                "src/deformable_aggregation_with_depth_cuda.cu",
+            ],
+        ),
+        make_cuda_ext(
+            "deformable_aggregation_ext",
+            module=".",
+            sources=[
+                "src/deformable_aggregation.cpp",
+                "src/deformable_aggregation_cuda.cu",
+            ],
+        ),
+    ]
     setup(
-        name="deformable_aggregation_with_depth_ext",
-        ext_modules=[
-            make_cuda_ext(
-                "deformable_aggregation_with_depth_ext",
-                module=".",
-                sources=[
-                    f"src/deformable_aggregation_with_depth.cpp",
-                    f"src/deformable_aggregation_with_depth_cuda.cu",
-                ],
-            ),
-        ],
-        cmdclass={"build_ext": BuildExtension},
-    )
-    setup(
-        name="deformable_aggregation_ext",
-        ext_modules=[
-            make_cuda_ext(
-                "deformable_aggregation_ext",
-                module=".",
-                sources=[
-                    f"src/deformable_aggregation.cpp",
-                    f"src/deformable_aggregation_cuda.cu",
-                ],
-            ),
-        ],
+        name="sparsedrive_ops",
+        ext_modules=ext_modules,
         cmdclass={"build_ext": BuildExtension},
     )
