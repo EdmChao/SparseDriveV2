@@ -27,7 +27,6 @@ exp
 # running scripts
 scripts_dev/*
 
-ckpt/
 dataset/
 exp/
 vis/
